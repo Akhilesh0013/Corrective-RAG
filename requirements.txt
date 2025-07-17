@@ -1,2 +1,3 @@
 python-dotenv
 llama-index
+llama-index-tools-linkup-research

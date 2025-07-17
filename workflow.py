@@ -8,7 +8,23 @@ from llama_index.core.workflow import (
     Event,
 )
 
-from llama_index.core.prompts import PromptTemplate  
+from llama_index.core.prompts import PromptTemplate 
+from llama_index.core.workflow import (
+    StartEvent,
+    StopEvent,
+    step,
+    Workflow,
+    Context,
+)
+from llama_index.core.llms import LLM
+from linkup import LinkupClient
+from llama_index.tools.linkup_research import LinkupToolSpec
+
+
+
+
+
+
 
 
 from dotenv import load_dotenv
@@ -86,3 +102,31 @@ Respond with the optimized query only:
 """
 
 )
+
+
+class CorrectiveRAGWorkflow(Workflow):
+    def __init__(self, index, linkup_api_key: str , llm: Optional[LLM] = None, **kwargs: Any ) -> None :
+
+        super().__init__(**kwargs)
+        self.index = index
+        self.linkup_tool = LinkupToolSpec(api_key=linkup_api_key,
+                                          depth="deep",
+                                          output_type="searchResults", # or "sourcedAnswer" or "structured" 
+                                        ) 
+        self.llm = llm
+    
+    
+        
+       
+
+                
+                
+                
+                
+                
+    
+        
+        
+        
+
+        
